@@ -17,6 +17,9 @@ class Servo {
         this._speed = speed
     }
 
+    public getPulse(): number {
+        return this._pulse
+    }
     public up(): void {
         this.setPulse(this._up, this._speed)
     }
@@ -30,7 +33,13 @@ class Servo {
         PCAmotor.StopServo(this._pin)
     }
     public isDown(): boolean {
-        return Math.abs(this._pulse - this._down) <= 150
+        return Math.abs(this._pulse - this._down) < 30
+    }
+    public isUp(): boolean {
+        return Math.abs(this._pulse - this._up) < 30
+    }
+    public isCentered(): boolean {
+        return Math.abs(this._pulse - this._center) < 30
     }
     public setPulse(pulse: number, speed: number = 10) {
         pulse = Math.constrain(pulse, Math.min(this._down, this._up), Math.max(this._down, this._up))
