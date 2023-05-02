@@ -191,6 +191,11 @@ namespace PCAmotor {
         MotorStopAll()
     }
 
+    /**
+     * DC motor run
+     * @param index Index of motor; eg: PCAmotor.Motors.M1
+     * @param speed relative speed from -255 to 255; eg: 200
+    */
     //% blockId=magicbit_motor_run block="Motor|%index|speed %speed"
     //% weight=85
     //% speed.min=-255 speed.max=255
@@ -198,7 +203,7 @@ namespace PCAmotor {
     export function MotorRun(index: Motors, speed: number): void {
         if (!initialized) {
             initPCA9685()
-        }
+        } 
         speed = speed * 16; // map 255 to 4096
         if (speed >= 4096) {
             speed = 4095
