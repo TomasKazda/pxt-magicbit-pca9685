@@ -239,7 +239,7 @@ namespace PCAmotor {
 
     /**
      * Servo Execute
-     * @param index Servo Channel; eg: PCAservo.Servos.S1
+     * @param index Servo Channel; eg: PCAmotor.Servos.S1
      * @param degree [0-180] degree of servo; eg: 0, 90, 180
     */
     //% blockId=magicbit_servo block="Servo|%index|degree %degree"
@@ -257,7 +257,7 @@ namespace PCAmotor {
 
     /**
       * Servo Execute (from-to)
-      * @param index Servo Channel; eg: PCAservo.Servos.S1
+      * @param index Servo Channel; eg: PCAmotor.Servos.S1
       * @param degree1 [0-180] degree of servo; eg: 0, 90, 180
       * @param degree2 [0-180] degree of servo; eg: 0, 90, 180
       * @param speed [1-10] speed of servo; eg: 1, 10
@@ -293,7 +293,7 @@ namespace PCAmotor {
 
     /**
      * Geek Servo Execute
-     * @param index Servo Channel; eg: PCAservo.Servos.S1
+     * @param index Servo Channel; eg: PCAmotor.Servos.S1
      * @param pwm pulse width [500-2500] in ms of servo; eg: 500, 1500, 2500
     */
     //% blockId=magicbit_geekservo block="Servo|%index|pulse width %v_us"
@@ -310,7 +310,7 @@ namespace PCAmotor {
 
     /**
       * Geek Servo Execute (from-to)
-      * @param index Servo Channel; eg: PCAservo.Servos.S1
+      * @param index Servo Channel; eg: PCAmotor.Servos.S1
       * @param pwm1 [300-2800];
       * @param pwm2 [300-2800];
       * @param speed [1-10] speed of servo; eg: 1, 10
@@ -346,7 +346,7 @@ namespace PCAmotor {
 
     /**
      * Release servo
-     * @param index Servo Channel; eg: PCAservo.Servos.S1
+     * @param index Servo Channel; eg: PCAmotor.Servos.S1
     */
     //% blockId=magicbit_stopservo block="Servo|%index|"
     //% weight=80
