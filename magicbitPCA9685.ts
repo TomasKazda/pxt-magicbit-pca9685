@@ -41,9 +41,9 @@ namespace PCAmotor {
 
     export enum Steppers {
         //% block="STPM1"
-        STPM1 = 0x2,
+        STPM1 = 0x1,
         //% block="STPM2"
-        STPM2 = 0x1
+        STPM2 = 0x2
     }
 
     export enum Servos {
@@ -160,6 +160,35 @@ namespace PCAmotor {
         setPwm((index - 1) * 2 + 1, 0, 0);
     }
 
+    /**
+     * Stepper run
+     * @param index Stepper; eg: PCAmotor.Steppers.STPM1
+     * @param dir is forward direction; eg: true
+    */
+    //% blockId=magicbit_stepper_start block="Stepper 28BYJ-48|%index|start"
+    //% weight=92
+    export function StepperStart(index: Steppers, dir: boolean = true): void {
+        if (!initialized) {
+            initPCA9685()
+        }
+        setStepper(index, dir);
+    }
+
+    /**
+     * Stepper stop
+     * @param index Stepper; eg: PCAmotor.Steppers.STPM1
+    */
+    //% blockId=magicbit_stepper_stop block="Stepper 28BYJ-48|%index|stop"
+    //% weight=93
+    export function StepperStop(index: Steppers): void {
+        if (!initialized) {
+            initPCA9685()
+        }
+        for (let i = 4; i > 0; i--) {
+            setPwm(index * 4 - i, 0, 0);
+        }
+    }
+
     //% blockId=magicbit_stepper_degree block="Stepper 28BYJ-48|%index|degree %degree"
     //% weight=90
     export function StepperDegree(index: Steppers, degree: number): void {
@@ -169,7 +198,11 @@ namespace PCAmotor {
         setStepper(index, degree > 0);
         degree = Math.abs(degree);
         basic.pause(10240 * degree / 360);
-        MotorStopAll()
+        //StopMotor
+        for (let i = 3; i <= 0; i--)
+        {
+            setPwm(index * 4 - i, 0, 0);
+        }
     }
 
     /**

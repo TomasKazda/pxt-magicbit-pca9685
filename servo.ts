@@ -1,3 +1,7 @@
+/**
+ * Declare a class outside and attach to a namespace.
+ */
+//% blockNamespace=ServoHelper color="#FF8000"
 class Servo {
     private _up: number
     private _down: number
@@ -6,7 +10,7 @@ class Servo {
     private _pin: PCAmotor.Servos
     private _speed: number
 
-    constructor(pin: PCAmotor.Servos, up: number, down: number, center: number = 1500, speed: number = 10) {
+    constructor(pin: PCAmotor.Servos, up: number = 600, down: number = 2400, center: number = 1500, speed: number = 10) {
         //super(pin, initPulse)
         PCAmotor.GeekServo(pin, center)
         this._pin = pin
@@ -15,6 +19,16 @@ class Servo {
         this._pulse = center
         this._center = center
         this._speed = speed
+    }
+
+    /**
+     * Set the Servo widget to inactive
+     * @param active set on (true) or off (false), eg: true
+     */
+    //% block="turn %ServoHelper(servo) %active"
+    //% active.shadow=toggleOnOff
+    setActive(active: boolean) {
+        let activeX = active;
     }
 
     public getPulse(): number {
@@ -54,5 +68,21 @@ class Servo {
         this.setPulse(this._pulse + us, speed)
         if (this._pulse == this._up || this._pulse == this._down || this._pulse == this._center)
             this.stop()
+    }
+}
+
+/**
+ * Better servo control including smooth movement
+ */
+//% color="#FF8000"
+namespace ServoHelper {
+
+    /**
+     * Create a Servo and automtically set it to a variable
+     */
+    //% block="create servo"
+    //% blockSetVariable=servo
+    export function createServo(): Servo {
+        return new Servo(PCAmotor.Servos.S1);
     }
 }
